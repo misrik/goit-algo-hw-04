@@ -2,7 +2,7 @@ print("Available commands:")
 print("  - hello: Greet the assistant")
 print("  - add <name> <phone>: Add a new contact")
 print("  - change <name> <new_phone>: Update an existing contact")
-print("  - show <name> _: Show details of a contact")
+print("  - show <name>: Show details of a contact")
 print("  - all: Show all contacts")
 print("  - close/exit: Exit the assistant")
 
