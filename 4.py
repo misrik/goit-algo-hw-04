@@ -3,6 +3,7 @@ print("  - hello: Greet the assistant")
 print("  - add <name> <phone>: Add a new contact")
 print("  - change <name> <new_phone>: Update an existing contact")
 print("  - show <name>: Show details of a contact")
+print("  - phone <name>: Calling a contact")
 print("  - all: Show all contacts")
 print("  - close/exit: Exit the assistant")
 
@@ -17,15 +18,28 @@ def add_contact(args, contacts):
     return "Contact added."
 
 def change_contact(args, contacts):
+    if len(args) != 2:
+        raise ValueError("Invalid command. Please provide a name and a new phone number.")
     name, phone = args
     if name in contacts:
-        raise ValueError("Contact")
-    contacts[name] = phone
-    return "Contact updated successfully"
+        contacts[name] = phone
+        return "Contact updated successfully"
+    else:
+        raise ValueError("Contact not found")
 
 def show_contact(args, contacts):
     name, *_ = args
     return contacts[name]
+
+def phone_contact(args, contacts):
+    if len(args) != 1:
+        return "Invalid command. Please provide a username."
+    username = args[0]
+    if username in contacts:
+        return f"Calling a phone number for {username}: {contacts[username]}"
+    else:
+        return f"No contact found with username {username}"
+
 
 def main():
     contacts = {}
@@ -53,6 +67,9 @@ def main():
         elif command == "all":
             for name, phone in contacts.items():
                 print(f"{name}: {phone}")
+        
+        elif command == "phone":
+            print(phone_contact(args, contacts))
 
 
         else:
